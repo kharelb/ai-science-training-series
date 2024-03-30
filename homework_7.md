@@ -142,4 +142,31 @@ test_batch_size = 32
 Accuracy on test set: 98.72%
 ```
 
+## 3. Groq
+**I modified the bert_tiny.py to accept custom input. Below is what I got running the code**
+```(groqflow) kharelbikash@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$ python bert_tiny.py --custom_input "What are the Highest and Lowest point on Earth?"
+/home/kharelbikash/miniconda3/envs/groqflow/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+
+Woohoo! Build "bert_tiny" (build_name auto-selected) found in cache. Loading it!
+Preprocessing data.
+/home/kharelbikash/.local/lib/python3.10/site-packages/datasets/load.py:1461: FutureWarning: The repository for sst contains custom code which must be executed to correctly load the dataset. You can inspect the repository content at https://hf.co/datasets/sst
+You can avoid this message in future by passing the argument `trust_remote_code=True`.
+Passing `trust_remote_code=True` will be mandatory to load this dataset from the next major release of `datasets`.
+  warnings.warn(
+
+Info: No inputs received for benchmark. Using the inputs provided during model compilation.
+Running inference on GroqChip.
+Running inference using PyTorch model (CPU).
+100%|█████████████████████████████████████████████████████████████████████████████████████████| 2210/2210 [00:04<00:00, 449.23it/s]
++--------+----------+-------------------------+----------------+----------------------+-------------+
+| Source | Accuracy | end-to-end latency (ms) | end-to-end IPS | on-chip latency (ms) | on-chip IPS |
++--------+----------+-------------------------+----------------+----------------------+-------------+
+|  cpu   |  77.47%  |           2.23          |     448.91     |          --          |      --     |
+|  groq  |  77.47%  |           0.05          |    19328.60    |         0.03         |   37576.72  |
++--------+----------+-------------------------+----------------+----------------------+-------------+
+Proof point /home/kharelbikash/groqflow/proof_points/natural_language_processing/bert/bert_tiny.py finished!
+(groqflow) kharelbikash@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$
+```
+
 
